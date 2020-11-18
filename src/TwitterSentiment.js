@@ -80,7 +80,7 @@ function Tweets (props) {
         return (
           <li key={index} className={'popular-item ' + tweet.type}>
             <div key={tweet.id}>{tweet.text}</div>
-            <div>Sentiment: <strong>{tweet.sentiment}</strong> - Score: <strong>{tweet.score}</strong></div>
+            <div>Sentiment: <strong>{tweet.data.sentiment}</strong> - Score: <strong>{tweet.data.score}</strong></div>
           </li>
         )
       })}
