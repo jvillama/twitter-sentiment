@@ -78,7 +78,7 @@ function Tweets (props) {
     <ul className='popular-list'>
       {props.tweets.map(function (tweet, index) {
         return (
-          <li key={index} className={'popular-item ' + tweet.type}>
+          <li key={index} className={'popular-item ' + tweet.data.sentiment}>
             <div key={tweet.id}>{tweet.text}</div>
             <div>Sentiment: <strong>{tweet.data.sentiment}</strong> - Score: <strong>{tweet.data.score}</strong></div>
           </li>
