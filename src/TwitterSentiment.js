@@ -76,11 +76,27 @@ QueryInput.defaultProps = {
 function Tweets (props) {
   return (
     <ul className='popular-list'>
-      {props.tweets.map(function (tweet, index) {
+      {props.tweets.map(function (tweet, index) {        
+        let sentiment = 'neutral';
+        let pos_sent = 0;
+        let neg_sent = 0;
+        if ('data' in tweet) {
+          if (tweet.data !== null && 'sentiment' in tweet.data) {
+            pos_sent = tweet.data.sentiment.positive;
+            neg_sent = tweet.data.sentiment.negative;
+            
+            if (pos_sent > 0.66) {
+              sentiment = 'positive';
+            }
+            if (neg_sent > 0.66) {
+              sentiment = 'negative';
+            }
+          }
+        }
         return (
-          <li key={index} className={'popular-item ' + tweet.data.sentiment}>
+          <li key={index} className={'popular-item ' + sentiment}>
             <div key={tweet.id}>{tweet.text}</div>
-            <div>Sentiment: <strong>{tweet.data.sentiment}</strong> - Score: <strong>{tweet.data.score}</strong></div>
+            <div>Sentiment: <strong>{sentiment}</strong> - Positive Score: <strong>{pos_sent}</strong> - Negative Score: <strong>{neg_sent}</strong></div>
           </li>
         )
       })}
